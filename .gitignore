@@ -1,0 +1,33 @@
+# Virtual Environment
+.vevn/
+vevn/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Environment Variables
+.env
+
+# Testing 
+.pytest_cache/
+.coverage
+
+#IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Python Packaging
+*.egg-info/
+dist/
+build/ 
+
+# Unuse files(unnecessary)
+steps.txt
