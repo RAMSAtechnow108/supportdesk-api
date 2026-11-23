@@ -1,23 +1,35 @@
 # Virtual Environment
-.vevn/
-vevn/
+.venv/
+venv/
+env/
+ENV/
 
-# Python
+# Environment Variables and Secrets
+.env
+.env.*
+!.env.example
+
+# Python Cache
 __pycache__/
 *.py[cod]
+*$py.class
 
-# Environment Variables
-.env
-
-# Testing 
+# Testing and Coverage
 .pytest_cache/
 .coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
 
-#IDE
+# IDE
 .vscode/
 .idea/
+.spyproject/
+.spyderproject
 
-# OS
+# Operating System
 .DS_Store
 Thumbs.db
 
@@ -27,7 +39,29 @@ Thumbs.db
 # Python Packaging
 *.egg-info/
 dist/
-build/ 
+build/
+.eggs/
+wheels/
 
-# Unuse files(unnecessary)
+# Type Checking and Linting
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Celery
+celerybeat-schedule*
+celerybeat.pid
+
+# Redis
+*.rdb
+*.aof
+
+# Temporary Files
+tempCodeRunnerFile.py
+
+# Project-specific unused files
 steps.txt
