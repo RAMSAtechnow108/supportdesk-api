@@ -1,10 +1,9 @@
-from fastapi import FastAPI
-from app.config.settings import settings
-
-
+from fastapi import FastAPI, Depends, HTTPException, status
 from sqlalchemy import text
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
-from fastapi import Depends
+
+from app.config.settings import settings
 from app.database.session import get_db
 
 
@@ -32,19 +31,23 @@ def health_check():
     
 
 @app.get("/health/database")
-def database_health_check(db:Session=Depends(get_db)):
-    
+def database_health_check(db: Session = Depends(get_db)):
+
     try:
         db.execute(text("SELECT 1"))
+
         return {
-            "status":"health",
-            "database":"connected",
-            "message":"Database connection is working"
+            "status": "healthy",
+            "database": "connected",
+            "message": "Database connection is working"
         }
 
-    except Exception:
-        return {
-            "status":"unhealthy",
-            "database":"disconnected",
-            "message":"Database connection failed"
-        }
+    except SQLAlchemyError:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail={
+                "status": "unhealthy",
+                "database": "disconnected",
+                "message": "Database connection failed"
+            }
+        )
